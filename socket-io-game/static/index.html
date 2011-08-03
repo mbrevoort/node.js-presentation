@@ -1,0 +1,62 @@
+<html>
+	<head>
+		<link href='styles/gloria.font' rel='stylesheet' type='text/css'>
+		<link href='styles/styles.css' rel='stylesheet' type='text/css'>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script>
+			 var socket = io.connect();
+			 socket.on('select', function (location) {
+			    $("#" + location.coord).addClass("yours").removeClass('mine');
+			 });
+
+			 socket.on('hover', function (location) {
+			    $("#" + location.coord).addClass("other_hover");
+			 });
+
+			 socket.on('unhover', function (location) {
+			    $("#" + location.coord).removeClass("other_hover");
+			 });
+
+			function initBoard(size) {
+				var board = $("#board").css('width', 21*size);
+				for(var i=0, l=size*size; i<l; i++) {
+					var piece = $('<div id="' + i + '"></div>');
+					piece.appendTo(board);
+					if(i % size == 0) piece.addClass("begin");
+				}
+			}
+			
+			$(document).ready(function() {
+				
+				initBoard(20);
+				
+				$("#board > *")
+					.hover(
+						function(evt) {
+							var elem = $(evt.target);
+							elem.addClass('hover');
+							socket.emit('hover', { coord: elem.attr("id") });
+						},
+						function(evt) {
+							var elem = $(evt.target);
+							elem.removeClass('hover');						
+							socket.emit('unhover', { coord: elem.attr("id") });
+						}
+					)
+					.click(function(evt) {
+						var elem = $(evt.target);
+						elem.addClass('mine').removeClass('yours').removeClass('hover');
+						socket.emit('select', { coord: elem.attr("id") });
+					})
+				
+				
+			});
+		</script>
+		
+	</head>
+	<body>
+		<h1>Socket.io Demo</h1>
+		<div id="board"></div>
+	</body>
+</html>

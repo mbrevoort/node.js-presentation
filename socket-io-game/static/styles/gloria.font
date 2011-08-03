@@ -1,0 +1,6 @@
+@font-face {
+  font-family: 'Gloria Hallelujah';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Gloria Hallelujah'), local('GloriaHallelujah'), url('http://themes.googleusercontent.com/font?kit=CA1k7SlXcY5kvI81M_R28Y7PgI6IeGWgqdOlp0TQlJM') format('truetype');
+}

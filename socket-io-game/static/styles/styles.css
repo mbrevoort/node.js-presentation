@@ -1,0 +1,33 @@
+body {
+	background-color:#353129;
+	font-family: 'Gloria Hallelujah', cursive;
+	color: #EEE;
+	text-align:center;
+	text-shadow: 2px 2px 2px #000;
+}
+#board {
+	margin:auto;
+}
+#board * {
+	width: 19px;
+	height: 19px;
+	float:left;
+	border: 1px gray solid;
+	background-color: #8BC84B;
+	border-radius: 2px;
+}
+#board .mine {
+	background-color: #353129;
+}
+#board .yours {
+	background-color: #EEEEEE;
+}
+.begin {
+	clear:left;
+}
+#board div.hover { 
+	background-color: yellow;
+}
+#board div.other_hover { 
+	background-color: blue;
+}

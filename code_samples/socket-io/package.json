@@ -1,0 +1,14 @@
+{
+  "name": "socketio_demo",
+  "description": "",
+  "version": "0.1.0",
+  "author": "Mike Brevoort <mikebre@ecollege.com>",
+  "contributors": [ 
+    { "name": "Mike Brevoort", "email": "mikebre@ecollege.com" }
+  ],
+  "dependencies": {
+  	"express": "latest",
+  	"socket.io": "= 0.7.7"
+  },
+  "engines": { "node": ">= 0.4.8" }
+}

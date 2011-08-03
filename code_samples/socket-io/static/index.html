@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+		<script>
+			 var socket = io.connect('http://localhost:8080');
+			 socket.on('data', function (data) {
+			    console.log(data);
+				if(data.action == "create") {
+					$("#things").append( newRowText(data) );			
+				}
+				else if (data.action == "delete") {
+					$("#" + rowId(data)).remove();
+				}
+				else if(data.action == "update") {
+					$("#" + rowId(data)).replaceWith( newRowText(data) );
+				}
+			    //socket.emit('my other event', { my: 'data' });
+			 });
+
+			function rowId(data) {
+				return data.type + "_" + data.data.id;
+			}
+
+			function newRowText(data) {
+				return '<div id="' + rowId(data) + '">' 
+					+ data.type + " " + data.data.id + "  -->  " 
+					+ data.data.title + " by " + data.data.author + "</div>"
+			}
+		</script>
+	</head>
+	<body>
+		<div id="things"></div>
+	</body>
+</html>
